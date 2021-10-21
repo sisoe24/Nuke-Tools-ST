@@ -19,4 +19,5 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         file_content = self.view.substr(sublime.Region(0, self.view.size()))
         data = main.prepare_data(file_content, self.view.file_name())
 
-        main.send_data(hostname, port, data)
+        output = main.send_data(hostname, port, data)
+        print(output)

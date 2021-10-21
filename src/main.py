@@ -3,12 +3,29 @@
 import os
 import json
 import socket
-import logging
 import configparser
+
+from datetime import datetime
 
 NSS_CONFIG = os.path.join(
     os.path.expanduser('~'), '.nuke', 'NukeServerSocket.ini'
 )
+
+
+def format_output(text):
+    """Format output to send at console.
+
+    Example: `[17:49:25] [NukeTools] Hello World`
+
+    Args:
+        text (str): str to be formatted.
+
+    Returns:
+        str: formatted string.
+    """
+    now = datetime.now()
+    time = now.strftime("%H:%M:%S")
+    return "[{}] [NukeTools] {}".format(time, text)
 
 
 def nss_ip_port():
@@ -67,17 +84,16 @@ def send_data(hostname, port, data):
         try:
             _socket.connect((hostname, port))
         except ConnectionRefusedError:
-            logging.warning(
-                '[NukeToolsST] Connection refused. '
+            err_msg = "ConnectionRefusedError: {}:{}.\n".format(hostname, port)
+            err_msg += (
                 'Check Sublime settings if you specified manually the address,'
-                ' or check if plugin inside Nuke is connected.')
-
-            # TODO: should raise Error? its to verbose and doesn't really help
-            return 'ConnectionRefusedError'
+                ' or check if plugin inside Nuke is connected.'
+            )
+            return format_output(err_msg)
 
         _socket.sendall(bytearray(data, encoding='utf-8'))
 
         # the returned data from NukeServerSocket
         data = _socket.recv(2048)
 
-        return data.decode('utf-8')
+        return format_output(data.decode('utf-8'))
