@@ -14,7 +14,7 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         settings = sublime.load_settings("Preferences.sublime-settings")
 
         hostname = settings.get("nss_hostname", "127.0.0.1")
-        port = settings.get("nss_tcp_port", main.nss_ip_port())
+        port = settings.get("nss_port", main.nss_ip_port())
 
         file_content = self.view.substr(sublime.Region(0, self.view.size()))
         data = main.prepare_data(file_content, self.view.file_name())
