@@ -70,6 +70,6 @@ Download the companion plugin: [Git](https://github.com/sisoe24/NukeServerSocket
 
 ## Changelog
 
-[0.1.0] xxx
+[0.1.0] 10-21-2021
 
 * Initial release.
