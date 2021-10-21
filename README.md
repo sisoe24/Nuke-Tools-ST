@@ -1,7 +1,7 @@
 # Nuke Tools ST README
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c4ddfe29201343e9afc6223949662cd9)](https://www.codacy.com/gh/sisoe24/NukeToolsST/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sisoe24/NukeToolsST&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/c4ddfe29201343e9afc6223949662cd9)](https://www.codacy.com/gh/sisoe24/NukeToolsST/dashboard?utm_source=github.com&utm_medium=referral&utm_content=sisoe24/NukeToolsST&utm_campaign=Badge_Coverage)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/522af2c16ed84926b77f2e095cfa8b87)](https://www.codacy.com/gh/sisoe24/Nuke-Tools-ST/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sisoe24/Nuke-Tools-ST&amp;utm_campaign=Badge_Grade)
+
 
 > This is a companion extension for: [NukeServerSocket](#nukeserversocket) and is based on [NukeTools](https://marketplace.visualstudio.com/items?itemName=virgilsisoe.nuke-tools).
 
