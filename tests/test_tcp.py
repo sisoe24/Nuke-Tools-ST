@@ -71,16 +71,6 @@ def test_connection_timeout():
     assert f'ConnectionTimeoutError. {hostname}:{FREE_PORT}' in data
 
 
-def test_connection_overflow_error():
-    """Test connection overflow port error.
-
-    Add value to port to force overflow port error.
-    """
-    port = FREE_PORT + 10000
-    data = nuke_tools.send_data(LOCALHOST, port, 'hello', 0.1)
-    assert 'OverflowError:' in data
-
-
 def test_connection_socket_error():
     """Test connection base exception.
 

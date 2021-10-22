@@ -101,7 +101,7 @@ def send_data(hostname, port, data, timeout=10.0):
         timeout (float): Timeout connection for the socket. Defaults to: 10.0.
 
     Returns:
-        str: If socket successded will return the received data, otherwise a 
+        str: If socket succeeded will return the received data, otherwise a
         status message signaling what went wrong.
     """
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as _socket:
@@ -116,8 +116,6 @@ def send_data(hostname, port, data, timeout=10.0):
             output = _err_msg("ConnectionRefusedError", hostname, port)
         except socket.timeout:
             output = _err_msg("ConnectionTimeoutError", hostname, port)
-        except OverflowError as err:
-            output = "OverflowError: {}".format(err)
         except socket.error as err:
             output = _err_msg("UnknownError: {}".format(err), hostname, port)
         except Exception as err:
