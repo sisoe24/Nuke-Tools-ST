@@ -29,10 +29,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - continue-on-error: true
       # Runs a command using the runners shell
       - run: python3 -m pip install pytest pytest-cov
       - run: python3 -m pytest
+        continue-on-error: true
       - name: Run codacy-coverage-reporter
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
