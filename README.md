@@ -1,7 +1,5 @@
 # Nuke Tools ST README
 
-# TODO: add install option
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522af2c16ed84926b77f2e095cfa8b87)](https://www.codacy.com/gh/sisoe24/Nuke-Tools-ST/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sisoe24/Nuke-Tools-ST&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/522af2c16ed84926b77f2e095cfa8b87)](https://www.codacy.com/gh/sisoe24/Nuke-Tools-ST/dashboard?utm_source=github.com&utm_medium=referral&utm_content=sisoe24/Nuke-Tools-ST&utm_campaign=Badge_Coverage)
 
@@ -18,6 +16,10 @@ A Sublime Text package that allows to send python or blinkscript code to be exec
   * Multiple connections can be made to the same Nuke instance.
   * BlinkScript support.
 
+## Installation
+
+> TODO: add section
+
 ## BlinkScript
 
 > [NukeServerSocket](#nukeserversocket) >= 0.1.0 is needed in order for this to work.
@@ -32,11 +34,11 @@ The accepted file extension are `.cpp` or `.blink`.
 
 No settings are necessary if connection is expected to be on the same computer.
 NukeToolsST will automatically connect to the `localhost` and will use the port
-configuration found inside `$HOME/.nuke/NukeServerSocket.ini`. The configuration value is updated automatically each time its changed inside the plugin.
+configuration found inside _$HOME/.nuke/NukeServerSocket.ini_. The configuration value is updated automatically each time its changed inside the plugin.
 
 However if connection is between different computers, user must specify the host and the port manually.
 
-> Keep in mind that, once the addresses are specified manually, will always take over the defaults one. Be sure to delete them if you want to just use it one the same computer.
+> Keep in mind that, once the addresses are specified manually, will always take over the defaults one. Its best to delete them if you want to just use it one the same computer.
 
 ### `nss_port`:`integer`
 
@@ -45,6 +47,11 @@ A different port for the connection. Port should match the one from NukeServerSo
 ### `nss_hostname`:`string`
 
 Same as `nss_port`. Host could be the localhost or the local ip.
+
+#### Note
+
+Attempting to connect to a manually specified host that is down (not reachable)
+will result in a temporary freeze of the Sublime UI for 10 seconds.
 
 ### Example
 
