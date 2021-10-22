@@ -26,11 +26,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - continue-on-error: true
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - continue-on-error: true
       # Runs a command using the runners shell
       - run: python3 -m pip install pytest pytest-cov
       - run: python3 -m pytest
