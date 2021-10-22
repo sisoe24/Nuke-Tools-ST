@@ -11,7 +11,7 @@ A Sublime Text package that allows to send python or blinkscript code to be exec
 ## Features
 
 * Execute code inside Nuke from a machine in your local network.
-  * Get output of Nuke code execution.
+  * Get output of Nuke code execution inside Sublime console.
   * When used locally (same machine) no configuration is required, just running the server inside Nuke.
   * Specify a custom address when connection is from/to another computer.
   * Multiple connections can be made to the same Nuke instance.
