@@ -8,7 +8,7 @@ import socketserver
 
 import pytest
 
-import main
+from src import nuke_tools
 
 LOCALHOST = '127.0.0.1'
 
@@ -52,7 +52,7 @@ def tcp_server():
 
 def test_send_data(tcp_server):
     """Test that send data method returns expected value."""
-    data = main.send_data(LOCALHOST, FREE_PORT, 'hello')
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
 
     assert isinstance(data, str)
     assert '[NukeTools] hello' in data
@@ -60,5 +60,5 @@ def test_send_data(tcp_server):
 
 def test_connection_refused():
     """Test sending data when server is not listening."""
-    data = main.send_data(LOCALHOST, FREE_PORT, 'hello')
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
     assert 'ConnectionRefusedError' in data

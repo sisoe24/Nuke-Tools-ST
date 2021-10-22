@@ -3,7 +3,7 @@
 import os
 import pytest
 
-import main
+from src import nuke_tools
 
 
 @pytest.fixture(scope='session')
@@ -17,4 +17,4 @@ def package():
 @pytest.fixture(autouse=True)
 def no_config(monkeypatch):
     """Monkeypatch the config file path."""
-    monkeypatch.setattr(main, 'NSS_CONFIG', '')
+    monkeypatch.setattr(nuke_tools, 'NSS_CONFIG', '')

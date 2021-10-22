@@ -2,30 +2,30 @@
 import re
 import os
 
-import main
+from src import nuke_tools
 
 
 def test_ip_port_is_int():
     """Test the ip port is always an integer."""
-    port = main.nss_ip_port()
+    port = nuke_tools.nss_ip_port()
     assert isinstance(port, int)
 
 
 def test_default_port():
     """Test default port value if not file is found."""
-    port = main.nss_ip_port()
+    port = nuke_tools.nss_ip_port()
     assert port == 54321
 
 
 def test_prepare_data():
     """Test if the data returns a stringified dictionary."""
-    data = main.prepare_data('hello', 'test.py')
+    data = nuke_tools.prepare_data('hello', 'test.py')
     assert data == '{"text": "hello", "file": "test.py"}'
 
 
 def test_format_output():
     """Test the format output return."""
-    output = main.format_output('hello')
+    output = nuke_tools.format_output('hello')
     assert re.search(r'\[\d\d:\d\d:\d\d\] \[NukeTools\] hello', output)
 
 
@@ -33,7 +33,7 @@ def test_settings_name(package):
     """Test that sublime settings name match correct name."""
     default_settings = ["nss_port", "nss_hostname"]
 
-    main_file = os.path.join(package, 'nuke_tools.py')
+    main_file = os.path.join(package, 'main.py')
     with open(main_file, encoding='utf-8') as file:
         content = file.read()
         settings = re.findall(r'(?<=settings.get\(")\w+', content, re.S)
