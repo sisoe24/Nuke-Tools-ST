@@ -66,34 +66,66 @@ def prepare_data(data, file=''):
     return json.dumps(data)
 
 
-def send_data(hostname, port, data):
-    """Send data over tcp network.
+def _err_msg(err, hostname, port):
+    """Generate template error message.
 
-    Send the current active file text via TCP to the host and port specified by
-    user. If no settings are found then will fallback on the default which will
-    be the localhost and the port from NukeServerSocket.ini.
+    Generate a template error message with the hostname and the port:
+    `ConnectionError. 192.168.1.50:55555`.
 
-    Once the output is ready, will be returned as a string.
+    Args:
+        err (str): Error message to add.
+        hostname (str): hostname.
+        port (str|int): port.
 
     Returns:
-        str: the returned data from the socket.
+       str: the error message created.
+    """
+    err = "{}. {}:{}.\n".format(err, hostname, port)
+    err += (
+        'Check Sublime settings if you specified manually the address,'
+        ' or check if plugin inside Nuke is connected.'
+    )
+    return err
+
+
+def send_data(hostname, port, data, timeout=10.0):
+    """Send data over tcp network.
+
+    Send some text data via TCP connection to the host and port specified. Once
+    the output is ready, will be returned as a string.
+
+    Args:
+        hostname (str): The name of the host.
+        port (int): The port number.
+        data (data): The data to send.
+        timeout (float): Timeout connection for the socket. Defaults to: 10.0.
+
+    Returns:
+        str: If socket successded will return the received data, otherwise a 
+        status message signaling what went wrong.
     """
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as _socket:
 
-        # connection host and port must match whats inside Nuke
+        # set a connection timeout in case host is down.
+        _socket.settimeout(timeout)
+
         try:
+            # connection host and port must match whats inside Nuke
             _socket.connect((hostname, port))
         except ConnectionRefusedError:
-            err_msg = "ConnectionRefusedError: {}:{}.\n".format(hostname, port)
-            err_msg += (
-                'Check Sublime settings if you specified manually the address,'
-                ' or check if plugin inside Nuke is connected.'
-            )
-            return format_output(err_msg)
+            output = _err_msg("ConnectionRefusedError", hostname, port)
+        except socket.timeout:
+            output = _err_msg("ConnectionTimeoutError", hostname, port)
+        except OverflowError as err:
+            output = "OverflowError: {}".format(err)
+        except socket.error as err:
+            output = _err_msg("UnknownError: {}".format(err), hostname, port)
+        except Exception as err:
+            output = "UnknownException: {}".format(err)
+        else:
+            _socket.sendall(bytearray(data, encoding='utf-8'))
 
-        _socket.sendall(bytearray(data, encoding='utf-8'))
+            # the returned data from NukeServerSocket
+            output = _socket.recv(2048).decode('utf-8')
 
-        # the returned data from NukeServerSocket
-        data = _socket.recv(2048)
-
-        return format_output(data.decode('utf-8'))
+        return format_output(output)
