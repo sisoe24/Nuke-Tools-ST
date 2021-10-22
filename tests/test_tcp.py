@@ -60,5 +60,40 @@ def test_send_data(tcp_server):
 
 def test_connection_refused():
     """Test sending data when server is not listening."""
-    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
-    assert 'ConnectionRefusedError' in data
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello', 0.1)
+    assert f'ConnectionRefusedError. {LOCALHOST}:{FREE_PORT}' in data
+
+
+def test_connection_timeout():
+    """Test connection timeout."""
+    hostname = '192.168.1.99'
+    data = nuke_tools.send_data('192.168.1.99', FREE_PORT, 'hello', 0.1)
+    assert f'ConnectionTimeoutError. {hostname}:{FREE_PORT}' in data
+
+
+def test_connection_overflow_error():
+    """Test connection overflow port error.
+
+    Add value to port to force overflow port error.
+    """
+    port = FREE_PORT + 10000
+    data = nuke_tools.send_data(LOCALHOST, port, 'hello', 0.1)
+    assert 'OverflowError:' in data
+
+
+def test_connection_socket_error():
+    """Test connection base exception.
+
+    Wrong hostname and port to force socket error.
+    """
+    data = nuke_tools.send_data('111.111.1.11', 0, 'hello', 0.1)
+    assert 'UnknownError:' in data
+
+
+def test_connection_generic_exception():
+    """Test connection base exception.
+
+    Convert port to string to force exception.
+    """
+    data = nuke_tools.send_data(LOCALHOST, str(FREE_PORT), 'hello', 0.1)
+    assert 'UnknownException:' in data
