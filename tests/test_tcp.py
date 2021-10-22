@@ -61,14 +61,14 @@ def test_send_data(tcp_server):
 def test_connection_refused():
     """Test sending data when server is not listening."""
     data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello', 0.1)
-    assert f'ConnectionRefusedError. {LOCALHOST}:{FREE_PORT}' in data
+    assert 'ConnectionRefusedError. {}:{}'.format(LOCALHOST, FREE_PORT) in data
 
 
 def test_connection_timeout():
     """Test connection timeout."""
     hostname = '192.168.1.99'
     data = nuke_tools.send_data('192.168.1.99', FREE_PORT, 'hello', 0.1)
-    assert f'ConnectionTimeoutError. {hostname}:{FREE_PORT}' in data
+    assert 'ConnectionTimeoutError. {}:{}'.format(hostname, FREE_PORT) in data
 
 
 def test_connection_socket_error():
