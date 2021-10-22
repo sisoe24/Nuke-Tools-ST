@@ -22,6 +22,12 @@ def test_prepare_data():
     assert data == '{"text": "hello", "file": "test.py"}'
 
 
+def test_format_output():
+    """Test the format output return."""
+    output = main.format_output('hello')
+    assert re.search(r'\[\d\d:\d\d:\d\d\] \[NukeTools\] hello', output)
+
+
 def test_settings_name(package):
     """Test that sublime settings name match correct name."""
     default_settings = ["nss_port", "nss_hostname"]

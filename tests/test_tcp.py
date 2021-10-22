@@ -55,10 +55,10 @@ def test_send_data(tcp_server):
     data = main.send_data(LOCALHOST, FREE_PORT, 'hello')
 
     assert isinstance(data, str)
-    assert data == 'hello'
+    assert '[NukeTools] hello' in data
 
 
 def test_connection_refused():
     """Test sending data when server is not listening."""
     data = main.send_data(LOCALHOST, FREE_PORT, 'hello')
-    assert data == 'ConnectionRefusedError'
+    assert 'ConnectionRefusedError' in data
