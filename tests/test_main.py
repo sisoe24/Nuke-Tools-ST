@@ -1,7 +1,8 @@
 """Test module for NukeTools."""
 import re
 import os
-from src import main
+
+import main
 
 
 def test_ip_port_is_int():

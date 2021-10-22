@@ -3,7 +3,7 @@
 import os
 import pytest
 
-from src import main
+import main
 
 
 @pytest.fixture(scope='session')

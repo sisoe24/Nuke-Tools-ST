@@ -8,7 +8,7 @@ import socketserver
 
 import pytest
 
-from src import main
+import main
 
 LOCALHOST = '127.0.0.1'
 

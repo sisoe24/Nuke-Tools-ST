@@ -3,7 +3,7 @@
 import sublime
 import sublime_plugin
 
-from .src import main
+import main
 
 
 class RunNukeToolsCommand(sublime_plugin.TextCommand):
