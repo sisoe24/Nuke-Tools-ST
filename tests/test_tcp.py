@@ -76,7 +76,7 @@ def test_connection_socket_error():
 
     Wrong hostname and port to force socket error.
     """
-    data = nuke_tools.send_data('9999999', 0, 'hello')
+    data = nuke_tools.send_data('111.111.1.11', 0, 'hello')
     assert 'UnknownError:' in data
 
 
