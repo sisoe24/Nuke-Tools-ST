@@ -118,7 +118,7 @@ def send_data(hostname, port, data, timeout=10.0):
             output = _err_msg("ConnectionTimeoutError", hostname, port)
         except socket.error as err:
             output = _err_msg("UnknownError: {}".format(err), hostname, port)
-        except Exception as err:
+        except Exception as err:  # skipcq: PYL-W0703
             output = "UnknownException: {}".format(err)
         else:
             _socket.sendall(bytearray(data, encoding='utf-8'))
