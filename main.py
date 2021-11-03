@@ -29,7 +29,7 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         """Show command in the menu based on the current file extension.
 
         Command will be shown only if active file ends with `.py`, `.cpp`,
-        `.blink` extension.
+        `.blink` extension and if settings `nss_disable_context_menu` is false.
 
         Returns:
             bool - True if command should be shown, False otherwise.
