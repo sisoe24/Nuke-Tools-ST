@@ -8,14 +8,30 @@
 
 A Sublime Text package that allows to send python or blinkscript code to be executed inside Nuke.
 
+- [Nuke Tools ST README](#nuke-tools-st-readme)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [BlinkScript](#blinkscript)
+  - [Connection](#connection)
+    - [Note](#note)
+  - [Package Settings](#package-settings)
+    - [`nss_port`:`integer`](#nss_portinteger)
+    - [`nss_hostname`:`string`](#nss_hostnamestring)
+    - [`nss_disable_context_menu`:`bool`](#nss_disable_context_menubool)
+    - [Example](#example)
+  - [Commands](#commands)
+  - [Key Bindings](#key-bindings)
+  - [NukeServerSocket](#nukeserversocket)
+  - [Changelog](#changelog)
+
 ## Features
 
-* Execute code inside Nuke from a machine in your local network.
-  * Get output of Nuke code execution inside Sublime console.
-  * When used locally (same machine) no configuration is required, just running the server inside Nuke.
-  * Specify a custom address when connection is from/to another computer.
-  * Multiple connections can be made to the same Nuke instance.
-  * BlinkScript support.
+- Execute code inside Nuke from a machine in your local network.
+  - Get output of Nuke code execution inside Sublime console.
+  - When used locally (same machine) no configuration is required, just running the server inside Nuke.
+  - Specify a custom address when connection is from/to another computer.
+  - Multiple connections can be made to the same Nuke instance.
+  - BlinkScript support.
 
 ## Installation
 
@@ -37,9 +53,9 @@ No settings are necessary if connection is expected to be on the same computer.
 NukeToolsST will automatically connect to the `localhost` and will use the port
 configuration found inside _$HOME/.nuke/NukeServerSocket.ini_. The configuration value is updated automatically each time its changed inside the plugin.
 
-However if connection is between different computers, port and hostname must be changed manually.
+However if connection is between different computers, port and hostname must be changed manually via the [package settings](#package-settings).
 
-> Keep in mind that, once the addresses are specified manually, will always take over the defaults one. Its best to delete them if you want to just use it one the same computer.
+> Keep in mind that, once the addresses are specified manually, will always take over the defaults one. Its best to delete them if you only connect between the same computer.
 
 ### Note
 
@@ -72,20 +88,13 @@ Disable Sublime context menu entry if not needed (clean up). Defaults to `false`
 
 ## Commands
 
-The following command will be available:
+The following command will be available: `run_nuke_tools`.
 
-```json
-{
-    "caption":"Run Code inside Nuke",
-    "command": "run_nuke_tools" 
-}
-```
+A new entry "Run Code inside Nuke" will be added to the context menu (right click) when the active file ends with one of the following extension:
 
-The command can be invoked from the context menu (right click) when the active file ends with the following extension:
-
-* `.py`
-* `.cpp`
-* `.blink`
+- `.py`
+- `.cpp`
+- `.blink`
 
 ## Key Bindings
 
@@ -110,4 +119,4 @@ Download the companion plugin: [Git](https://github.com/sisoe24/NukeServerSocket
 
 [0.1.0] 10-21-2021
 
-* Initial release.
+- Initial release.
