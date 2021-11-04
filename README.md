@@ -118,6 +118,13 @@ Download the companion plugin: [Git](https://github.com/sisoe24/NukeServerSocket
 
 ## Changelog
 
+[0.2.0] 11-04-2021
+
+- Removed most of the commands, leaving only the context menu one.
+- Removed default key bindings.
+- New configuration to hide context menu.
+- Context menu options shows only on specific file extensions.
+
 [0.1.0] 10-21-2021
 
 - Initial release.
