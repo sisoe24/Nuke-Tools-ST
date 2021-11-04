@@ -23,6 +23,7 @@ A Sublime Text package that allows to send python or blinkscript code to be exec
   - [Key Bindings](#key-bindings)
   - [NukeServerSocket](#nukeserversocket)
   - [Changelog](#changelog)
+  - [Overview](#overview)
 
 ## Features
 
@@ -120,3 +121,7 @@ Download the companion plugin: [Git](https://github.com/sisoe24/NukeServerSocket
 [0.1.0] 10-21-2021
 
 - Initial release.
+
+## Overview
+
+![example](example.gif)
