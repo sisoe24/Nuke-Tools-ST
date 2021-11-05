@@ -36,7 +36,9 @@ A Sublime Text package that allows to send python or blinkscript code to be exec
 
 ## Installation
 
-> TODO: add section after it has been approved to Package Control.
+The preferred method of installation is via the [Package Control](https://packagecontrol.io).
+
+- [Link](https://packagecontrol.io/packages/NukeToolsST)
 
 ## BlinkScript
 
