@@ -31,7 +31,7 @@ def test_format_output():
 
 def test_settings_name(package):
     """Test that sublime settings name match correct name."""
-    default_settings = ["nss_port", "nss_hostname"]
+    default_settings = ["nss_port", "nss_hostname", "nss_disable_context_menu"]
 
     main_file = os.path.join(package, 'main.py')
     with open(main_file, encoding='utf-8') as file:
