@@ -80,9 +80,9 @@ def _err_msg(err, hostname, port):
     Returns:
        str: the error message created.
     """
-    err = "{}. {}:{}.\n".format(err, hostname, port)
-    err += (
-        'Check Sublime settings if you specified manually the address,'
+    err = (
+        "{}. {}:{}.\n".format(err, hostname, port)
+        + 'Check Sublime settings if you specified manually the address,'
         ' or check if plugin inside Nuke is connected.'
     )
     return err
