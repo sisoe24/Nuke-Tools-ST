@@ -51,7 +51,7 @@ def nss_ip_port():
 def prepare_data(data, file=''):
     """Prepare the data to be send over the network.
 
-    Data should be wrappend inside a stringified array with the key `text` with
+    Data should be wrapped inside a stringified array with the key `text` with
     the code to execute and an optional key `file` for the file that is being
     executed.
 
