@@ -34,8 +34,8 @@ Download the companion plugin:
 
 - Execute code inside Nuke from a machine in your local network.
   - Get the output of Nuke code execution inside Sublime console.
-  - When used locally (same machine), the package requires no configuration, just a running server inside Nuke.
-  - Specify a custom address when the connection is from/to another computer..
+  - When used locally (same machine), the package requires no configuration, but running NukeServerSocket inside Nuke.
+  - Specify a custom address when the connection is from/to another computer.
   - BlinkScript support.
 
 ## 1.3. Installation
@@ -49,26 +49,31 @@ The preferred method of installation is via the [Package Control](https://packag
 
 [Demo](#110-overview)
 
-Once NukeServerSocket is up and running, you can execute your python/blink file with the new [command](#17-commands).
+Once NukeServerSocket is up and running, you can execute your python/blink file with the new command `run_nuke_tools` or
+via the right-click context menu. [Commands](#17-commands)
 
 ## 1.5. BlinkScript
 
-> NukeServerSocket >= 0.1.0 is needed in order for this to work.
+> NukeServerSocket version needs to be >= 0.1.0 for this to work.
 
-The extension will create a blinkscript node named after the currently active file.
-If the node already exists, it will only modify the code and recompile it.
+The extension will create a blinkscript node named after the active file.
+If the node already exists, it will update the code and recompile it.
 
 The accepted file extension code are `.cpp` or `.blink`.
 
 ## 1.6. Connection
 
-No settings are necessary if the connection is on the same computer. The package will automatically connect to the localhost and use the port configuration found inside `$HOME/.nuke/NukeServerSocket.ini`. The configuration value is updated every time it's changed inside the plugin.
+No settings are necessary if the connection is on the same computer. The package will automatically connect to the 
+localhost and use the port configuration found inside `$HOME/.nuke/NukeServerSocket.ini`. 
 
-However, if the connection is between different computers, the port, and hostname, must be changed manually via the [package settings](#package-settings).
+> Behind the scene, NukeServerSocket, updates the configuration value every time it's changed inside the plugin.
 
-> Keep in mind that once the addresses are specified manually, they will always take over the defaults one.
+If the connection is between different computers, you can change the port, and hostname, manually via the [package settings](#package-settings).
 
-**Note**: Attempting to establish a connection to a manually specified host which is down (i.e., not reachable) will result in a temporary freeze of the Sublime UI for 10 seconds..
+> Keep in mind that after you specify the addresses manually, they will always take over the defaults one.
+
+**Note**: Attempting to establish a connection to a manually specified host which is down (i.e., not reachable)
+will result in a temporary freeze of the Sublime UI for 10 seconds..
 
 ## 1.7. Package Settings
 
@@ -98,7 +103,8 @@ Example
 
 The following command will be available: `run_nuke_tools`.
 
-A new entry `Run Code inside Nuke`, will be added to the context menu (right-click) when the active file ends with one of the following extensions:
+The package adds a new entry `Run Code inside Nuke`, to the context menu (right-click) when the active file ends with one 
+of the following extensions:
 
 - `.py`
 - `.cpp`
