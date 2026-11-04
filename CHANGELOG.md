@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- Nuke code that runs longer than 10 seconds no longer reports a timeout error.
+- Connection errors while sending code or reading the reply now show a readable message instead of a traceback.
+- Right-clicking in an unsaved tab no longer raises an error in the console.
+
 ## [0.2.2] - 2026-11-04
 
 ### Fixed
