@@ -72,9 +72,6 @@ If the connection is between different computers, you can change the port, and h
 
 > Keep in mind that after you specify the addresses manually, they will always take over the defaults one.
 
-**Note**: Attempting to establish a connection to a manually specified host which is down (i.e., not reachable)
-will result in a temporary freeze of the Sublime UI for 10 seconds..
-
 ## 1.7. Package Settings
 
 - `nss_port`:`integer`
