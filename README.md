@@ -2,7 +2,6 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522af2c16ed84926b77f2e095cfa8b87)](https://www.codacy.com/gh/sisoe24/Nuke-Tools-ST/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sisoe24/Nuke-Tools-ST&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/522af2c16ed84926b77f2e095cfa8b87)](https://www.codacy.com/gh/sisoe24/Nuke-Tools-ST/dashboard?utm_source=github.com&utm_medium=referral&utm_content=sisoe24/Nuke-Tools-ST&utm_campaign=Badge_Coverage)
-[![DeepSource](https://deepsource.io/gh/sisoe24/Nuke-Tools-ST.svg/?label=active+issues&show_trend=true&token=Yrd2y9gG7y8h53JsDwyjQdFZ)](https://deepsource.io/gh/sisoe24/Nuke-Tools-ST/?ref=repository-badge)
 
 [![PackageControl](https://img.shields.io/badge/Package%20Control-Download-informational)](https://packagecontrol.io/packages/NukeToolsST)
 
@@ -140,4 +139,4 @@ Example
 
 ## 1.11. Overview
 
-![example](example.gif)
+![demo](resources/demo.gif)

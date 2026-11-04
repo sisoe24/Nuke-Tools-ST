@@ -4,10 +4,8 @@
 
 poetry.lock         export-ignore
 pyproject.toml      export-ignore
-pytest.ini          export-ignore
-.deepsource.toml    export-ignore
 
-example.gif         export-ignore
+resources           export-ignore
 
 # Directories
 .github             export-ignore
