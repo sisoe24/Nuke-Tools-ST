@@ -1,0 +1,41 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+## [Unreleased]
+
+## [0.2.2] - 2026-11-04
+
+### Fixed
+
+- Running code inside Nuke no longer freezes the Sublime Text UI when the host is slow or unreachable ([#2](https://github.com/sisoe24/Nuke-Tools-ST/issues/2)).
+
+### Changed
+
+- Moved the changelog from the README into its own file.
+
+## [0.2.1] - 2022-02-17
+
+### Changed
+
+- Updated the README documentation.
+
+## [0.2.0] - 2021-11-04
+
+### Added
+
+- New setting `nss_disable_context_menu` to hide the context menu entry.
+
+### Changed
+
+- The context menu entry shows only for `.py`, `.cpp` and `.blink` files.
+
+### Removed
+
+- Removed most of the commands, leaving only the context menu one.
+- Removed the default key bindings.
+
+## [0.1.0] - 2021-10-21
+
+- Initial release.
