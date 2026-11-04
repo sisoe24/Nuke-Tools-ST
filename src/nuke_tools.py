@@ -118,8 +118,8 @@ def send_data(hostname, port, data, timeout=10.0):
             _socket.settimeout(None)
             _socket.sendall(bytearray(data, encoding='utf-8'))
 
-            # the returned data from NukeServerSocket
-            output = _socket.recv(2048).decode('utf-8')
+            # NukeServerSocket closes the connection after the reply: read until then.
+            output = b''.join(iter(lambda: _socket.recv(4096), b'')).decode('utf-8')
         except ConnectionRefusedError:
             output = _err_msg("ConnectionRefusedError", hostname, port)
         except socket.timeout:

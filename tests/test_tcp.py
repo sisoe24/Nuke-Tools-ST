@@ -32,7 +32,8 @@ def socket_server():
 
         try:
             data = conn.recv(2048)
-            conn.sendall(data)
+            # reply bigger than one recv() to test the client reads it all
+            conn.sendall(data * 1000)
             break
 
         except Exception:
@@ -58,6 +59,7 @@ def test_send_data(tcp_server):
 
     assert isinstance(data, str)
     assert '[NukeTools] hello' in data
+    assert data.count('hello') == 1000
 
 
 def test_connection_refused():
