@@ -24,6 +24,8 @@ def socket_server():
     _socket.bind((LOCALHOST, FREE_PORT))
 
     _socket.listen(1)
+    # don't hang the test run if the client never connects
+    _socket.settimeout(5)
 
     while True:
         conn, _ = _socket.accept()
@@ -64,20 +66,25 @@ def test_connection_refused():
     assert 'ConnectionRefusedError. {}:{}'.format(LOCALHOST, FREE_PORT) in data
 
 
-def test_connection_timeout():
+def _raise(err):
+    """Return a fake `socket.connect` that raises `err`."""
+    def connect(*_):
+        raise err
+    return connect
+
+
+def test_connection_timeout(monkeypatch):
     """Test connection timeout."""
-    hostname = '192.168.1.99'
-    data = nuke_tools.send_data('192.168.1.99', FREE_PORT, 'hello', 0.1)
-    assert 'ConnectionTimeoutError. {}:{}'.format(hostname, FREE_PORT) in data
+    monkeypatch.setattr(socket.socket, 'connect', _raise(socket.timeout()))
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
+    assert 'ConnectionTimeoutError. {}:{}'.format(LOCALHOST, FREE_PORT) in data
 
 
-def test_connection_socket_error():
-    """Test connection base exception.
-
-    Wrong hostname and port to force socket error.
-    """
-    data = nuke_tools.send_data('111.111.1.11', 0, 'hello')
-    assert 'UnknownError:' in data
+def test_connection_socket_error(monkeypatch):
+    """Test connection socket error."""
+    monkeypatch.setattr(socket.socket, 'connect', _raise(OSError('unreachable')))
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
+    assert 'UnknownError: unreachable' in data
 
 
 def test_connection_generic_exception():
