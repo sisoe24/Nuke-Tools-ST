@@ -20,10 +20,11 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         file_content = self.view.substr(sublime.Region(0, self.view.size()))
         data = nuke_tools.prepare_data(file_content, self.view.file_name())
 
-        output = nuke_tools.send_data(hostname, port, data)
-
+        # send_data blocks up to its socket timeout: run it off the UI thread.
         # XXX: should probably use the logging module?
-        print(output)
+        sublime.set_timeout_async(
+            lambda: print(nuke_tools.send_data(hostname, port, data))
+        )
 
     def is_visible(self):
         """Show command in the menu based on the current file extension.
