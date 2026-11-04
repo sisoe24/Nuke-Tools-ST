@@ -33,7 +33,7 @@ def socket_server():
             conn.sendall(data)
             break
 
-        except Exception:  # skipcq: PYL-W0703
+        except Exception:
             break
 
     _socket.close()
