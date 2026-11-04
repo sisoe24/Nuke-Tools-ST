@@ -38,5 +38,5 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         if settings.get("nss_disable_context_menu", False):
             return False
 
-        _, file_ext = os.path.splitext(self.view.file_name())
+        _, file_ext = os.path.splitext(self.view.file_name() or "")
         return file_ext in ('.py', '.cpp', '.blink')
