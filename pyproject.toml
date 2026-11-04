@@ -7,9 +7,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pdoc = "^11.2.0"
 
 [tool.poetry.dev-dependencies]
+pdoc = "^11.2.0"
 pytest-cov = "^3.0.0"
 pytest = "^6.2.5"
 pytest-randomly = "^3.10.1"
