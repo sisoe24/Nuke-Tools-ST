@@ -19,7 +19,8 @@ A Sublime Text package to send Python or BlinkScript code inside Nuke.
   - [1.7. Package Settings](#17-package-settings)
   - [1.8. Commands](#18-commands)
   - [1.9. Key Bindings](#19-key-bindings)
-  - [1.10. Overview](#110-overview)
+  - [1.10. Python stubs](#110-python-stubs)
+  - [1.11. Overview](#111-overview)
 
 ## 1.1. NukeServerSocket
 
@@ -35,6 +36,7 @@ Download the companion plugin:
   - When used locally (same machine), the package requires no configuration, but running NukeServerSocket inside Nuke.
   - Specify a custom address when the connection is from/to another computer.
   - BlinkScript support.
+- Nuke/Hiero Python stubs for auto-complete suggestions, via [LSP-pyright](#110-python-stubs).
 
 ## 1.3. Installation
 
@@ -45,7 +47,7 @@ The preferred method of installation is via the [Package Control](https://packag
 
 ## 1.4. Usage
 
-[Demo](#110-overview)
+[Demo](#111-overview)
 
 Once NukeServerSocket is up and running, you can execute your python/blink file with the new command `run_nuke_tools` or
 via the right-click context menu. [Commands](#17-commands)
@@ -120,6 +122,26 @@ Example
 ]
 ```
 
-## 1.10. Overview
+## 1.10. Python stubs
+
+Sublime Text gets auto-complete for the Nuke and Hiero Python API through the [nuke-python-stubs](https://github.com/sisoe24/nuke-python-stubs) and a language server.
+
+1. Install the [LSP](https://packagecontrol.io/packages/LSP) and [LSP-pyright](https://packagecontrol.io/packages/LSP-pyright) packages via Package Control.
+2. Download `nuke-python-stubs.zip` from the [latest release](https://github.com/sisoe24/nuke-python-stubs/releases/latest) and extract it into a folder, for example `~/.nuke/nuke-python-stubs`. The folder should contain `nuke`, `nukescripts` and `hiero`.
+3. Open **Preferences** -> **Package Settings** -> **LSP** -> **Servers** -> **LSP-pyright** and add the folder to `python.analysis.extraPaths`. Use the full path:
+
+    ```json
+    {
+      "settings": {
+        "python.analysis.extraPaths": ["/Users/you/.nuke/nuke-python-stubs"]
+      }
+    }
+    ```
+
+4. Write `import nuke` in a Python file and you should see the auto-complete suggestions.
+
+To enable the stubs for a single project instead, add the same setting to your `.sublime-project` file under `settings` -> `LSP` -> `LSP-pyright` -> `settings`.
+
+## 1.11. Overview
 
 ![demo](resources/demo.gif)
