@@ -20,8 +20,7 @@ A Sublime Text package to send Python or BlinkScript code inside Nuke.
   - [1.7. Package Settings](#17-package-settings)
   - [1.8. Commands](#18-commands)
   - [1.9. Key Bindings](#19-key-bindings)
-  - [1.10. Changelog](#110-changelog)
-  - [1.11. Overview](#111-overview)
+  - [1.10. Overview](#110-overview)
 
 ## 1.1. NukeServerSocket
 
@@ -71,9 +70,6 @@ localhost and use the port configuration found inside `$HOME/.nuke/NukeServerSoc
 If the connection is between different computers, you can change the port, and hostname, manually via the [package settings](#package-settings).
 
 > Keep in mind that after you specify the addresses manually, they will always take over the defaults one.
-
-**Note**: Attempting to establish a connection to a manually specified host which is down (i.e., not reachable)
-will result in a temporary freeze of the Sublime UI for 10 seconds..
 
 ## 1.7. Package Settings
 
@@ -125,19 +121,6 @@ Example
 ]
 ```
 
-## 1.10. Changelog
-
-[0.2.0] 11-04-2021
-
-- Removed most of the commands, leaving only the context menu one.
-- Removed default key bindings.
-- New configuration to hide context menu.
-- Context menu options show only on specific file extensions.
-
-[0.1.0] 10-21-2021
-
-- Initial release.
-
-## 1.11. Overview
+## 1.10. Overview
 
 ![example](example.gif)

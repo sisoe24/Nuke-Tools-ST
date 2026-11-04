@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nuketoolsst"
-version = "0.1.0"
+version = "0.2.2"
 description = ""
 authors = ["virgilsisoe <virgilsisoe@gmail.com>"]
 license = "MIT"
