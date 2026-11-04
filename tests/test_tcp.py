@@ -94,3 +94,13 @@ def test_connection_generic_exception():
     """
     data = nuke_tools.send_data(LOCALHOST, str(FREE_PORT), 'hello')
     assert 'UnknownException:' in data
+
+
+def test_error_after_connect(monkeypatch):
+    """Test that errors while sending or receiving are caught."""
+    monkeypatch.setattr(socket.socket, 'connect', lambda *_: None)
+    monkeypatch.setattr(
+        socket.socket, 'sendall', _raise(ConnectionResetError('reset'))
+    )
+    data = nuke_tools.send_data(LOCALHOST, FREE_PORT, 'hello')
+    assert 'UnknownError: reset' in data

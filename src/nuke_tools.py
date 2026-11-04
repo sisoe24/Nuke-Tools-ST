@@ -98,7 +98,8 @@ def send_data(hostname, port, data, timeout=10.0):
         hostname (str): The name of the host.
         port (int): The port number.
         data (data): The data to send.
-        timeout (float): Timeout connection for the socket. Defaults to: 10.0.
+        timeout (float): Timeout for the connection only, not for the reply.
+            Defaults to: 10.0.
 
     Returns:
         str: If socket succeeded will return the received data, otherwise a
@@ -112,6 +113,13 @@ def send_data(hostname, port, data, timeout=10.0):
         try:
             # connection host and port must match whats inside Nuke
             _socket.connect((hostname, port))
+
+            # no limit on the reply: Nuke code can run for any length of time.
+            _socket.settimeout(None)
+            _socket.sendall(bytearray(data, encoding='utf-8'))
+
+            # the returned data from NukeServerSocket
+            output = _socket.recv(2048).decode('utf-8')
         except ConnectionRefusedError:
             output = _err_msg("ConnectionRefusedError", hostname, port)
         except socket.timeout:
@@ -120,10 +128,5 @@ def send_data(hostname, port, data, timeout=10.0):
             output = _err_msg("UnknownError: {}".format(err), hostname, port)
         except Exception as err:
             output = "UnknownException: {}".format(err)
-        else:
-            _socket.sendall(bytearray(data, encoding='utf-8'))
-
-            # the returned data from NukeServerSocket
-            output = _socket.recv(2048).decode('utf-8')
 
         return format_output(output)
