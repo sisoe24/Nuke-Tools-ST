@@ -21,7 +21,6 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         data = nuke_tools.prepare_data(file_content, self.view.file_name())
 
         # send_data blocks up to its socket timeout: run it off the UI thread.
-        # XXX: should probably use the logging module?
         sublime.set_timeout_async(
             lambda: print(nuke_tools.send_data(hostname, port, data))
         )
