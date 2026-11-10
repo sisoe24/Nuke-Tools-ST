@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-10
+
 ### Changed
 
 - The port is now read from `~/.nuke/nukeserversocket.json`, the settings file written by NukeServerSocket 1.0 and later. `NukeServerSocket.ini` is no longer read.
