@@ -5,6 +5,8 @@ import sys
 import types
 import importlib
 
+import pytest
+
 from src import nuke_tools
 
 
@@ -66,3 +68,53 @@ def test_menu_hidden_for_unsaved_view(package):
     plugin = _load_plugin(package)
     view = types.SimpleNamespace(file_name=lambda: None)
     assert plugin.RunNukeToolsCommand(view).is_visible() is False
+
+
+def test_config_port(tmp_path, monkeypatch):
+    """Test the port is read from the NukeServerSocket json file."""
+    config = tmp_path / 'nukeserversocket.json'
+    config.write_text('{"port": 55555}')
+    monkeypatch.setattr(nuke_tools, 'NSS_CONFIG', str(config))
+    assert nuke_tools.nss_ip_port() == 55555
+
+
+@pytest.mark.parametrize('content', [
+    'port = 54321',
+    '{"port": "not-a-number"}',
+    '{"port": null}',
+    '{"server_timeout": 3600000}',
+    '[54321]',
+])
+def test_malformed_config_uses_default_port(tmp_path, monkeypatch, content):
+    """Test a malformed json falls back to the default port."""
+    config = tmp_path / 'nukeserversocket.json'
+    config.write_text(content)
+    monkeypatch.setattr(nuke_tools, 'NSS_CONFIG', str(config))
+    assert nuke_tools.nss_ip_port() == 54321
+
+
+def test_port_setting_skips_config(package, monkeypatch):
+    """Test the `nss_port` setting is used without reading the config."""
+    plugin = _load_plugin(package)
+    sublime = plugin.sublime
+    sent = []
+    monkeypatch.setattr(
+        sublime, 'load_settings', lambda _: {'nss_port': 12345}
+    )
+    monkeypatch.setattr(sublime, 'Region', lambda *_: None, raising=False)
+    monkeypatch.setattr(
+        sublime, 'set_timeout_async', lambda func: func(), raising=False
+    )
+
+    def broken_config():
+        raise AssertionError('config must not be read when nss_port is set')
+
+    monkeypatch.setattr(plugin.nuke_tools, 'nss_ip_port', broken_config)
+    monkeypatch.setattr(
+        plugin.nuke_tools, 'send_data', lambda *args: sent.append(args)
+    )
+    view = types.SimpleNamespace(
+        size=lambda: 0, substr=lambda _: '', file_name=lambda: 'test.py'
+    )
+    plugin.RunNukeToolsCommand(view).run(None)
+    assert sent[0][1] == 12345

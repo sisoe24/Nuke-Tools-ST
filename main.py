@@ -15,7 +15,10 @@ class RunNukeToolsCommand(sublime_plugin.TextCommand):
         settings = sublime.load_settings("Preferences.sublime-settings")
 
         hostname = settings.get("nss_hostname", "127.0.0.1")
-        port = settings.get("nss_port", nuke_tools.nss_ip_port())
+        # the user setting wins: read the NukeServerSocket config only as fallback.
+        port = settings.get("nss_port")
+        if port is None:
+            port = nuke_tools.nss_ip_port()
 
         file_content = self.view.substr(sublime.Region(0, self.view.size()))
         data = nuke_tools.prepare_data(file_content, self.view.file_name())
