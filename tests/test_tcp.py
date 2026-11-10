@@ -16,17 +16,8 @@ with socketserver.TCPServer((LOCALHOST, 0), None) as s:
     FREE_PORT = s.server_address[1]
 
 
-def socket_server():
-    """Create a Server that listen for incoming requests."""
-    _socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    _socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-    _socket.bind((LOCALHOST, FREE_PORT))
-
-    _socket.listen(1)
-    # don't hang the test run if the client never connects
-    _socket.settimeout(5)
-
+def socket_server(_socket):
+    """Reply to incoming requests on an already listening socket."""
     while True:
         conn, _ = _socket.accept()
 
@@ -46,7 +37,16 @@ def socket_server():
 @pytest.fixture()
 def tcp_server():
     """Start the tcp server in a thread to allow async operation."""
-    server = threading.Thread(target=socket_server)
+    _socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    _socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    _socket.bind((LOCALHOST, FREE_PORT))
+
+    # listen before the thread starts, so the client can't connect too early
+    _socket.listen(1)
+    # don't hang the test run if the client never connects
+    _socket.settimeout(5)
+
+    server = threading.Thread(target=socket_server, args=(_socket,))
     server.daemon = True
     server.start()
     yield server
