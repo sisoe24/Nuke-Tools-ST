@@ -10,7 +10,6 @@ resources           export-ignore
 # Directories
 .github             export-ignore
 tests               export-ignore
-docs                export-ignore
 
 # Source files
 *                   text=auto
