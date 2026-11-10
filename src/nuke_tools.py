@@ -3,12 +3,11 @@
 import os
 import json
 import socket
-import configparser
 
 from datetime import datetime
 
 NSS_CONFIG = os.path.join(
-    os.path.expanduser('~'), '.nuke', 'NukeServerSocket.ini'
+    os.path.expanduser('~'), '.nuke', 'nukeserversocket.json'
 )
 
 
@@ -31,20 +30,19 @@ def format_output(text):
 def nss_ip_port():
     """Get NukeServerSocket ip port from configuration file.
 
-    Get the ip port from NukeServerSocket.ini inside the `$HOME/.nuke/` folder.
-    If file does not yet exists or the configuration value is absent, will
-    return a default value of: `54321`, that is also the default value of
-    NukeServerSocket.
+    Get the ip port from nukeserversocket.json inside the `$HOME/.nuke/`
+    folder. If file does not yet exists, is malformed, or the configuration
+    value is absent or invalid, will return a default value of: `54321`, that
+    is also the default value of NukeServerSocket.
 
     Returns:
         int: tcp port value to connect the socket client.
     """
     try:
-        config = configparser.ConfigParser()
-        config.read(NSS_CONFIG)
-        return int(config['server']['port'])
-    except KeyError:
-        # file doesn't exists yet or value is absent
+        with open(NSS_CONFIG, encoding='utf-8') as file:
+            return int(json.load(file)['port'])
+    except (OSError, ValueError, KeyError, TypeError):
+        # file is missing, malformed, or has no valid port value
         return 54321
 
 

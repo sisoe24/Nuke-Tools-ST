@@ -64,7 +64,7 @@ The accepted file extension code are `.cpp` or `.blink`.
 ## 1.6. Connection
 
 No settings are necessary if the connection is on the same computer. The package will automatically connect to the 
-localhost and use the port configuration found inside `$HOME/.nuke/NukeServerSocket.ini`. 
+localhost and use the port configuration found inside `$HOME/.nuke/nukeserversocket.json`. 
 
 > Behind the scene, NukeServerSocket, updates the configuration value every time it's changed inside the plugin.
 

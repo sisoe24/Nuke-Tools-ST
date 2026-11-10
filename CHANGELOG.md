@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- The port is now read from `~/.nuke/nukeserversocket.json`, the settings file written by NukeServerSocket 1.0 and later. `NukeServerSocket.ini` is no longer read.
+
+### Fixed
+
+- A malformed NukeServerSocket settings file no longer stops the command. The default port 54321 is used instead.
+- The `nss_port` setting now overrides the NukeServerSocket settings file, which is no longer read when `nss_port` is set.
+
 ## [0.2.3] - 2026-11-04
 
 ### Added
